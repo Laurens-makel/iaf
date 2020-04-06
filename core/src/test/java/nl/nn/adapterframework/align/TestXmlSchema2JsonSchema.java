@@ -23,7 +23,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.JsonSchema;
+import com.networknt.schema.SpecVersion;
 import com.networknt.schema.JsonSchemaFactory;
+import com.networknt.schema.SchemaValidatorsConfig;
 import com.networknt.schema.ValidationMessage;
 
 import nl.nn.adapterframework.core.PipeForward;
@@ -87,8 +89,12 @@ public class TestXmlSchema2JsonSchema extends AlignTestBase{
 //	    	if (!expectValid) {
 //				fail("expected to fail with reason ["+ expectedFailureReason +"]");
 //			}
-	    	JsonSchemaFactory factory = JsonSchemaFactory.getInstance();
-	    	JsonSchema schema = factory.getSchema(jsonSchemaContent);
+			JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V201909);
+			System.out.println("Schema factory ["+factory+"]");
+			SchemaValidatorsConfig validationConfig = new SchemaValidatorsConfig();
+			validationConfig.setEcma262Validator(true);
+			validationConfig.setTypeLoose(true);
+	    	JsonSchema schema = factory.getSchema(jsonSchemaContent, validationConfig);
 	    	
 	    	if (StringUtils.isNotEmpty(jsonString)) {
 		        ObjectMapper mapper = new ObjectMapper();

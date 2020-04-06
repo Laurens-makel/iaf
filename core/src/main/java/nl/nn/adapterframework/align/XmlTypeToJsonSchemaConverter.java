@@ -58,7 +58,7 @@ public class XmlTypeToJsonSchemaConverter  {
 
 	private ArrayList<String> namedJsonObjects = new ArrayList<String>();
 	private JsonObjectBuilder definitionsBuilder;
-	private final String JSON_SCHEMA = "http://json-schema.org/draft-04/schema#";
+	private final String JSON_SCHEMA = "https://json-schema.org/draft/2019-09/schema";
 
 	public XmlTypeToJsonSchemaConverter(List<XSModel> models, boolean skipArrayElementContainers, boolean skipRootElement, String schemaLocation) {
 		this.models=models;
